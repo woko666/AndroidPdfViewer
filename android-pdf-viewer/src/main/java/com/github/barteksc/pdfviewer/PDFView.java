@@ -630,7 +630,7 @@ public class PDFView extends RelativeLayout {
             listener.onLayerDrawn(canvas,
                     toCurrentScale(size.getWidth()),
                     toCurrentScale(size.getHeight()),
-                    page);
+                    page,translateX,translateY);
 
             canvas.translate(-translateX, -translateY);
         }
