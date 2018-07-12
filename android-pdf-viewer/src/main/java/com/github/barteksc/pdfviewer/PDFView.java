@@ -1248,10 +1248,14 @@ public class PDFView extends RelativeLayout {
         return pdfFile.getPageLinks(page);
     }
 
-    public boolean isPositionInside(float x, float y, RectF target) {
+    public boolean isPositionInside(float x, float y, int targetPage, RectF targetBounds) {
         float mappedX = -getCurrentXOffset() + x;
         float mappedY = -getCurrentYOffset() + y;
         int page = pdfFile.getPageAtOffset(isSwipeVertical() ? mappedY : mappedX, getZoom());
+        if (page != targetPage) {
+            return false;
+        }
+
         SizeF pageSize = pdfFile.getScaledPageSize(page, getZoom());
         int pageX, pageY;
         if (isSwipeVertical()) {
@@ -1263,7 +1267,7 @@ public class PDFView extends RelativeLayout {
         }
 
         RectF mapped = pdfFile.mapRectToDevice(page, pageX, pageY, (int) pageSize.getWidth(),
-                (int) pageSize.getHeight(), target);
+                (int) pageSize.getHeight(), targetBounds);
         mapped.sort();
         if (mapped.contains(mappedX, mappedY)) {
             return true;
