@@ -21,6 +21,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.PaintFlagsDrawFilter;
@@ -625,7 +626,8 @@ public class PDFView extends RelativeLayout {
                 translateX = pdfFile.getPageOffset(page, zoom);
             }
 
-            canvas.translate(translateX, translateY);
+            canvas.setMatrix(new Matrix());
+            canvas.translate(currentXOffset + translateX, currentYOffset + translateY);
             SizeF size = pdfFile.getPageSize(page);
             listener.onLayerDrawn(canvas,
                     toCurrentScale(size.getWidth()),
