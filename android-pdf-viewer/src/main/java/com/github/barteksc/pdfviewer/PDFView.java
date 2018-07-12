@@ -1269,6 +1269,7 @@ public class PDFView extends RelativeLayout {
         RectF mapped = pdfFile.mapRectToDevice(page, pageX, pageY, (int) pageSize.getWidth(),
                 (int) pageSize.getHeight(), targetBounds);
         mapped.sort();
+        System.out.println(String.format("Mapped: [%.2f,%.2f], extents [%.2f,%.2f]",mapped.left,mapped.top,mapped.width(),mapped.height()));
         if (mapped.contains(mappedX, mappedY)) {
             return true;
         }
