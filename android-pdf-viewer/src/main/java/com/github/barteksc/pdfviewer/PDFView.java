@@ -612,7 +612,8 @@ public class PDFView extends RelativeLayout {
         drawWithListener(canvas, currentPage, callbacks.getOnDraw());
 
         // Restores the canvas position
-        canvas.translate(-currentXOffset, -currentYOffset);
+        canvas.setMatrix(new Matrix());
+        //canvas.translate(-currentXOffset, -currentYOffset);
     }
 
     private void drawWithListener(Canvas canvas, int page, OnDrawListener listener) {
